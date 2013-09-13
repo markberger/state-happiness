@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Twitter Happiness</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Twitter Happiness">
+    <meta name="author" content="Mark J. Berger">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/controllers.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <br/>
+      <div class="row-fluid">
+        <div class="offset1 span10">
+          <div class="hero-unit" ng-controller="StateCtrl" >
+            {% raw %}
+            <h2>Average Happiness: {{averageHappiness()}}</h2>
+            <h4>Total Sample Size: {{totalMessages}}</h4>
+            <div class="dataTable">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Average Happiness</th>
+                    <th>Sample Size</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="state in states | orderBy:calcHappiness:reverse=true | limitTo:displayLimit">
+                    <td>{{state.name}}</td>
+                    <td class="happinessColumn">{{calcHappiness(state)}}</td>
+                    <td class="numMessagesColumn">{{state.numMessages}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br/>
+            <div class="btnWrapper">
+              <btn class="btn" id="showAllBtn" ng-click="expand()" ng-show="!isExpanded">Show All</btn>
+              <btn class="btn" id="showAllBtn" ng-click="minimize()" ng-show="isExpanded">Minimize</btn>
+            </div>
+            {% endraw %}
+          </div>
+        </div>
+      </div>
+    </div>
+	</body>
+
+</html>
