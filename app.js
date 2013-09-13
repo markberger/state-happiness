@@ -17,8 +17,9 @@ io.configure(function() {
 
 // Allows res.render() to work with nunjucks
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader(__dirname + '/public/views'));
+var port = process.env.PORT || 5000;
 env.express(app);
-server.listen(5000);
+server.listen(port);
 
 var T = new Twit({
     consumer_key: process.env.CONSUMER_KEY,
