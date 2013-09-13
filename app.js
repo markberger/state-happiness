@@ -35,6 +35,7 @@ function startFirehose() {
 
 app.use('/js', express.static(__dirname + '/public/js'));
 app.use('/css', express.static(__dirname + '/public/css'));
+app.use('/css', express.static(__dirname + '/vendor'));
 
 app.get('/', function(req, res) {
     res.render('index.html');
